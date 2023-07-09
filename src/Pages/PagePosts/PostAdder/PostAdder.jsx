@@ -6,6 +6,7 @@ const PostAdder = ({addPost}) => {
 
     const createPost = () => {
         addPost({...post, id: Date.now()})
+        setPost({title: '', body: ''})
     }
 
     return (
