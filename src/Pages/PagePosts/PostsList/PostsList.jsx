@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './PostsList.module.scss'
 import SinglePost from './SinglePost/SinglePost';
+import Loader from "../../../UI/Loader";
 
 const PostsList = ({posts, isLoading, deletePost}) => {
     return (
@@ -10,18 +11,12 @@ const PostsList = ({posts, isLoading, deletePost}) => {
             </div>
             <div>
                 {isLoading
-                    ? (
-                    <div className="d-flex justify-content-center">
-                        <div className="spinner-border" role="status">
-                            <span className="visually-hidden">Loading...</span>
-                        </div>
-                    </div>)
+                    ?
+                    <Loader />
                     :
                     (posts.length > 0)
                         ?
-                        (posts.map((post, index)=>{
-                            return <SinglePost post={post} postNumber={index+1} deletePost={deletePost} key={index} />
-                        }))
+                        posts.map((post, index)=> <SinglePost post={post} postNumber={index+1} deletePost={deletePost} key={index} />)
                         :
                         <h4 className={styles.titleNoPosts}>Посты не найдены!</h4>
                 }
