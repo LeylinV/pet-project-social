@@ -1,0 +1,33 @@
+.commentBlock{
+    position: relative;
+    padding: 15px 30px;
+    margin-bottom: 10px;
+    border: 1px solid black;
+    border-radius: 3px;
+}
+
+.commentTitle{
+    font-weight: 600;
+    font-style: italic;
+    align-items: center;
+}
+
+.commentBody{
+    padding: 5px 5px 0px 5px;
+}
+
+.commentEmail{
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    font-size: 12px;
+}
+.commentAvatar{
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+    background-color: #868E96;
+}
+.commentName{
+    padding-left: 10px;
+}

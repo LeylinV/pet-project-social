@@ -1,0 +1,27 @@
+.post{
+    position: relative;
+    padding: 15px 30px;
+    margin-bottom: 10px;
+    border: 1px solid black;
+    border-radius: 3px;
+    button{
+        width: 100%;
+        margin-top: 5px;
+    }
+}
+
+.postTitle{
+    font-weight: 600;
+    font-style: italic;
+}
+
+.postBody{
+    padding: 5px 5px 0px 5px;
+}
+
+.postId{
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    font-size: 12px;
+}
