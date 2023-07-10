@@ -26,7 +26,7 @@ const PagePosts = () => {
         }else{
             setSortedPosts([...posts].sort((post1, post2)=>{
                 if (selectedSort === 'id'){
-                    return post1 - post2
+                    return post1[selectedSort] - post2[selectedSort]
                 }
                 return post1[selectedSort].localeCompare(post2[selectedSort])
             }))

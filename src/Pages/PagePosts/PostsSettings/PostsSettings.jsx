@@ -4,6 +4,12 @@ import PostsSettingsSort from "./PostsSettingsSort/PostsSettingsSort";
 const PostsSettings = ({setIsModalVisible, selectDefault, selectSettings, selectedSort, setSelectedSort}) => {
     return (
         <div>
+            <input
+                className="form-control form-control-lg mb-3"
+                type="text"
+                placeholder="Поиск.."
+                aria-label=".form-control-lg example"
+            />
             <PostsSettingsSort
                 defaultValue={selectDefault}
                 arrSelectSettings={selectSettings}
