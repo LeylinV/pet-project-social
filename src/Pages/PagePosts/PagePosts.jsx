@@ -4,6 +4,7 @@ import PostsList from './PostsList/PostsList';
 import PostsSettings from "./PostsSettings/PostsSettings";
 import ModalWindow from "../../UI/ModalWindow/ModalWindow";
 import PostAdder from "./PostAdder/PostAdder";
+import {useSortedAndFilteredPosts} from "../../hooks/usePosts";
 
 const PagePosts = () => {
     const [posts, setPosts] = useState([]);
@@ -19,36 +20,7 @@ const PagePosts = () => {
         {value: 'body', title: 'По содержимому'},
         {value: 'id', title: 'По дате создания'}
     ])
-
-    const [sortedPosts, setSortedPosts] = useState([]);
-    const [sortedAndFilteredPosts, setSortedAndFilteredPosts] = useState([]);
-
-    useMemo(()=>{
-        if (!selectedSort){
-            setSortedPosts([...posts])
-        }else{
-            setSortedPosts([...posts].sort((post1, post2)=>{
-                if (selectedSort === 'id'){
-                    return post1[selectedSort] - post2[selectedSort]
-                }
-                return post1[selectedSort].localeCompare(post2[selectedSort])
-            }))
-        }
-    }, [posts, selectedSort])
-
-    useMemo(()=>{
-        if(!searchQuery){
-            setSortedAndFilteredPosts([...sortedPosts])
-        }else{
-            setSortedAndFilteredPosts([...posts].filter((post)=>{
-                return (
-                    post.title.includes(searchQuery)
-                    ||
-                    post.body.includes(searchQuery)
-                )
-            }))
-        }
-    },[sortedPosts, searchQuery])
+    const sortedAndFilteredPosts = useSortedAndFilteredPosts(posts, selectedSort, searchQuery)
 
     useEffect(()=>{
         fetch('https://jsonplaceholder.typicode.com/posts')
