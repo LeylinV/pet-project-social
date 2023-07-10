@@ -1,15 +1,30 @@
 import React from 'react';
 import PostsSettingsSort from "./PostsSettingsSort/PostsSettingsSort";
 
-const PostsSettings = ({setIsModalVisible, selectDefault, selectSettings, selectedSort, setSelectedSort}) => {
+const PostsSettings = (
+    {
+        setIsModalVisible,
+        selectDefault,
+        selectSettings,
+        selectedSort,
+        setSelectedSort,
+        searchQuery,
+        setSearchQuery
+    }) => {
     return (
         <div>
-            <input
-                className="form-control form-control-lg mb-3"
-                type="text"
-                placeholder="Поиск.."
-                aria-label=".form-control-lg example"
-            />
+            <div className="input-group mb-3">
+                <span className="input-group-text" id="basic-addon1">🔍</span>
+                <input
+                    type="text"
+                    className="form-control form-control-lg"
+                    placeholder="Поиск.."
+                    aria-label=".form-control-lg example"
+                    aria-describedby="basic-addon1"
+                    value={searchQuery}
+                    onChange={(e)=> setSearchQuery(e.target.value)}
+                />
+            </div>
             <PostsSettingsSort
                 defaultValue={selectDefault}
                 arrSelectSettings={selectSettings}

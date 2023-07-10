@@ -10,6 +10,8 @@ const PagePosts = () => {
     const [isLoading, setIsLoading] = useState(true)
     const [isModalVisible, setIsModalVisible] = useState(false)
 
+    const [searchQuery, setSearchQuery] = useState('')
+
     const [selectDefault, setSelectDefault] = useState('Выберите тип сортировки')
     const [selectedSort, setSelectedSort] = useState('')
     const [selectSettings, setSelectSettings] = useState([
@@ -19,6 +21,7 @@ const PagePosts = () => {
     ])
 
     const [sortedPosts, setSortedPosts] = useState([]);
+    const [sortedAndFilteredPosts, setSortedAndFilteredPosts] = useState([]);
 
     useMemo(()=>{
         if (!selectedSort){
@@ -32,6 +35,20 @@ const PagePosts = () => {
             }))
         }
     }, [posts, selectedSort])
+
+    useMemo(()=>{
+        if(!searchQuery){
+            setSortedAndFilteredPosts([...sortedPosts])
+        }else{
+            setSortedAndFilteredPosts([...posts].filter((post)=>{
+                return (
+                    post.title.includes(searchQuery)
+                    ||
+                    post.body.includes(searchQuery)
+                )
+            }))
+        }
+    },[sortedPosts, searchQuery])
 
     useEffect(()=>{
         fetch('https://jsonplaceholder.typicode.com/posts')
@@ -61,8 +78,10 @@ const PagePosts = () => {
                 selectSettings={selectSettings}
                 selectedSort={selectedSort}
                 setSelectedSort={setSelectedSort}
+                searchQuery={searchQuery}
+                setSearchQuery={setSearchQuery}
             />
-            <PostsList posts={sortedPosts} isLoading ={isLoading} deletePost={deletePost}/>
+            <PostsList posts={sortedAndFilteredPosts} isLoading ={isLoading} deletePost={deletePost}/>
         </div>
     );
 };
