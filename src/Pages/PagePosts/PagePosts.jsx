@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useMemo, useState} from 'react';
 import styles from './PagePosts.module.scss'
 import PostsList from './PostsList/PostsList';
 import PostsSettings from "./PostsSettings/PostsSettings";
@@ -9,6 +9,29 @@ const PagePosts = () => {
     const [posts, setPosts] = useState([]);
     const [isLoading, setIsLoading] = useState(true)
     const [isModalVisible, setIsModalVisible] = useState(false)
+
+    const [selectDefault, setSelectDefault] = useState('Выберите тип сортировки')
+    const [selectedSort, setSelectedSort] = useState('')
+    const [selectSettings, setSelectSettings] = useState([
+        {value: 'title', title: 'По названию'},
+        {value: 'body', title: 'По содержимому'},
+        {value: 'id', title: 'По дате создания'}
+    ])
+
+    const [sortedPosts, setSortedPosts] = useState([]);
+
+    useMemo(()=>{
+        if (!selectedSort){
+            setSortedPosts([...posts])
+        }else{
+            setSortedPosts([...posts].sort((post1, post2)=>{
+                if (selectedSort === 'id'){
+                    return post1 - post2
+                }
+                return post1[selectedSort].localeCompare(post2[selectedSort])
+            }))
+        }
+    }, [posts, selectedSort])
 
     useEffect(()=>{
         fetch('https://jsonplaceholder.typicode.com/posts')
@@ -32,8 +55,14 @@ const PagePosts = () => {
             <ModalWindow isVisible={isModalVisible} setIsVisible={setIsModalVisible}>
                 <PostAdder addPost={addPost}/>
             </ModalWindow>
-            <PostsSettings setIsModalVisible={setIsModalVisible}/>
-            <PostsList posts={posts} isLoading ={isLoading} deletePost={deletePost}/>
+            <PostsSettings
+                setIsModalVisible={setIsModalVisible}
+                selectDefault={selectDefault}
+                selectSettings={selectSettings}
+                selectedSort={selectedSort}
+                setSelectedSort={setSelectedSort}
+            />
+            <PostsList posts={sortedPosts} isLoading ={isLoading} deletePost={deletePost}/>
         </div>
     );
 };
