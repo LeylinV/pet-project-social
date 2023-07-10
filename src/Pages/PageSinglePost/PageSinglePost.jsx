@@ -13,6 +13,7 @@ const PageSinglePost = () => {
     useEffect(()=>{
         setIsLoadingPost(true)
         setIsLoadingComments(true)
+
         axios.get(`https://jsonplaceholder.typicode.com/posts/${id}`)
             .then(res=> {
                 setPost(res.data)
@@ -23,6 +24,16 @@ const PageSinglePost = () => {
             .then(res=>{
                 setComments(res.data)
                 setIsLoadingComments(false)
+            })
+            .catch(()=>{
+                setIsLoadingPost(false)
+                setIsLoadingComments(false)
+                setPost(
+                    {
+                        title:'Пост не найден!',
+                        body: 'Скорее всего, вы открыли пост, который создали сами и он не был найден по запросу',
+                        id: id
+                    })
             })
     },[id])
     return (
