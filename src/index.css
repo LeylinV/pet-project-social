@@ -17,9 +17,7 @@ body {
 a{
   color: black;
   text-decoration: none;
-}:hover{
-  color: black !important;
- }
+}
 
 .post-enter {
   transform: scale(0);
