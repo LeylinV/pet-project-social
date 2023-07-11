@@ -11,11 +11,7 @@ const PostsList = ({posts, isLoading, deletePost}) => {
                 <h3 className={styles.mainTitle}>Посты</h3>
             </div>
             <div>
-                {isLoading
-                    ?
-                    <Loader />
-                    :
-                    (posts.length > 0)
+                {(posts.length > 0 || isLoading)
                         ? (
                             <TransitionGroup>
                                 {posts.map((post, index) => (
@@ -32,6 +28,7 @@ const PostsList = ({posts, isLoading, deletePost}) => {
                         :
                         <h4 className={styles.titleNoPosts}>Посты не найдены!</h4>
                 }
+                {isLoading && <Loader /> }
             </div>
         </div>
     );
