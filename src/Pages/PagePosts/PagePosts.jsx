@@ -23,8 +23,11 @@ const PagePosts = () => {
     const sortedAndFilteredPosts = useSortedAndFilteredPosts(posts, selectedSort, searchQuery)
 
     useEffect(()=>{
+
         fetch('https://jsonplaceholder.typicode.com/posts')
-            .then(response => response.json())
+            .then(
+                response => response.json()
+            )
             .then(data => {
                 setPosts(data)
                 setIsLoading(false)
