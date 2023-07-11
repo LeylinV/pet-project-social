@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from "react-router-dom";
 import styles from './Header.module.scss'
 
 const Header = () => {
@@ -7,10 +8,10 @@ const Header = () => {
             <div className="container">
                 <div className="d-flex justify-content-between align-items-center">
                     <div className={`${styles.leftLogo}`}>
-                        Social
+                        <Link to='/'>Social</Link>
                     </div>
                     <div className={`${styles.rightSide}`}>
-                        Пусто
+                        <Link to='/posts'>Посты</Link>
                     </div>
                 </div>
             </div>

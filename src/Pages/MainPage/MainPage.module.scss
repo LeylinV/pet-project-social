@@ -1,0 +1,21 @@
+.mainTitle{
+  text-align: center;
+  font-family: 'Fira Sans', sans-serif;
+  font-weight: 900;
+}
+.smallTitle{
+  text-align: center;
+  a{
+    color: #868E96;
+    text-decoration:none;
+  }:hover{
+       color: #868E96;
+       text-decoration: underline;
+     }
+}
+
+.list{
+  li{
+    margin-bottom: 15px;
+  }
+}
