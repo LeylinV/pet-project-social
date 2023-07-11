@@ -11,7 +11,7 @@ function App() {
         <Routes>
           <Route path='/' element={<Layout/>}>
             <Route path='/' element={<MainPage/>}/>
-            <Route path='posts/' element={<PagePosts />}/>
+            <Route path='posts' element={<PagePosts />}/>
             <Route path="posts/:id" element={<PageSinglePost />}/>
           </Route>
         </Routes>

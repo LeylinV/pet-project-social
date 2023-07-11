@@ -8,7 +8,7 @@ const SinglePost = ({post, postNumber, deletePost}) => {
         deletePost(postId)
     }
     const openPost = (postId)=>{
-        navigate(`posts/${postId}`)
+        navigate(`/posts/${postId}`)
     }
 
     return (
