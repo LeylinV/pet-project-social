@@ -12,6 +12,7 @@ const Header = () => {
                     </div>
                     <div className={`${styles.rightSide}`}>
                         <Link to='/posts'>Посты</Link>
+                        <Link to='/login'>Логин</Link>
                     </div>
                 </div>
             </div>

@@ -1,4 +1,5 @@
 header{
+    font-weight: 700;
     width: 100%;
     background-color: #cdcdcd;
     padding: 10px 0;
@@ -13,5 +14,8 @@ header{
 }
 
 .rightSide{
-    float: right
+    float: right;
+    a{
+        margin-left: 15px;
+    }
 }
