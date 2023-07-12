@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import styles from './LoginPage.module.scss'
 import {useAuth} from "../../hooks/useAuth";
 import {useLocation, useNavigate} from "react-router-dom";
+import {isLoginFormValid} from "../../utils/isLoginFormValid";
 
 const LoginPage = () => {
     const location = useLocation()
@@ -20,7 +21,7 @@ const LoginPage = () => {
         setPasswordValid(passwordString.length > 8 ? 'is-valid': 'is-invalid')
     }
     useEffect(()=>{
-        if(loginValid === 'is-valid' && passwordValid === 'is-valid'){
+        if(isLoginFormValid(loginValid, passwordValid)){
             login()
             navigate(fromPage, {replace: true})
         }
