@@ -1,17 +1,30 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import styles from './LoginPage.module.scss'
+import {useAuth} from "../../hooks/useAuth";
+import {useLocation, useNavigate} from "react-router-dom";
 
 const LoginPage = () => {
-    const [login, setLogin] = useState('')
-    const [password, setPassword] = useState('')
+    const location = useLocation()
+    const fromPage = location.state?.from?.pathname || '/';
+    const navigate = useNavigate()
+
+    const [loginString, setLoginString] = useState('')
+    const [passwordString, setPasswordString] = useState('')
 
     const [loginValid, setLoginValid] = useState()
     const [passwordValid, setPasswordValid] = useState()
+    const {login} = useAuth()
 
     const tryAuth = () => {
-        setLoginValid(login ? 'is-valid': 'is-invalid')
-        setPasswordValid(password.length > 8 ? 'is-valid': 'is-invalid')
+        setLoginValid(loginString ? 'is-valid': 'is-invalid')
+        setPasswordValid(passwordString.length > 8 ? 'is-valid': 'is-invalid')
     }
+    useEffect(()=>{
+        if(loginValid === 'is-valid' && passwordValid === 'is-valid'){
+            login()
+            navigate(fromPage, {replace: true})
+        }
+    }, [loginValid,passwordValid])
 
     return (
         <div className="container mt-3">
@@ -19,8 +32,8 @@ const LoginPage = () => {
                 <h3 className="mb-5">Логин</h3>
                 <div className="form-floating mb-5">
                     <input
-                        value={login}
-                        onChange={(e)=>setLogin(e.target.value)}
+                        value={loginString}
+                        onChange={(e)=>setLoginString(e.target.value)}
                         type="text"
                         className={`form-control ` + loginValid}
                         id="floatingInput"
@@ -33,8 +46,8 @@ const LoginPage = () => {
                 </div>
                 <div className="form-floating mb-5">
                     <input
-                        value={password}
-                        onChange={(e)=>setPassword(e.target.value)}
+                        value={passwordString}
+                        onChange={(e)=>setPasswordString(e.target.value)}
                         type="password"
                         className={`form-control ` + passwordValid}
                         id="floatingPassword"

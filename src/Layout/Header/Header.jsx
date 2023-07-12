@@ -1,8 +1,17 @@
 import React from 'react';
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import styles from './Header.module.scss'
+import {useAuth} from "../../hooks/useAuth";
 
 const Header = () => {
+    const {isAuth, logout} = useAuth()
+    const navigate = useNavigate()
+
+    const handleLogout = () =>{
+        logout()
+        navigate('/login', {replace: false})
+    }
+
     return (
         <header>
             <div className="container">
@@ -12,7 +21,12 @@ const Header = () => {
                     </div>
                     <div className={`${styles.rightSide}`}>
                         <Link to='/posts'>Посты</Link>
-                        <Link to='/login'>Логин</Link>
+                        {isAuth
+                            ?
+                            <a style={{cursor: 'pointer'}} onClick={()=>handleLogout()}>Выход</a>
+                            :
+                            <Link to='/users/101'></Link>
+                        }
                     </div>
                 </div>
             </div>
