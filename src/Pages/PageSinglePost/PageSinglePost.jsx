@@ -23,10 +23,10 @@ const PageSinglePost = () => {
 
     useEffect(() => {
         fetchPostById()
-        fetchCommentsById()
     }, [id])
-
-
+    useEffect(() => {
+        fetchCommentsById()
+    }, [post])
 
 
     return (
